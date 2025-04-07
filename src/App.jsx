@@ -7,6 +7,14 @@ import {
   FileArchive,
   Sun,
   Moon,
+  Droplet,
+  Shield,
+  CircleDot,
+  MoreHorizontal,
+  Shirt,
+  Shoe,
+  HardHat,
+  Flame,
 } from "lucide-react";
 import "./index.css";
 import LightLogo from "./assets/logo-light (1).png";
@@ -24,6 +32,7 @@ const App = () => {
 
   const logo = darkMode ? DarkLogo : LightLogo;
   const smallLogo = darkMode ? DarkIcon : LightIcon;
+  const [showPpe, setShowPpe] = useState(false);
 
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
@@ -44,23 +53,92 @@ const App = () => {
 
   {/* Menu Items */}
   <ul className="space-y-2">
-    <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-      <Home size={20} />
-      {sidebarOpen && <span>Home</span>}
-    </li>
-    <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-      <Ship size={20} />
-      {sidebarOpen && <span>Vessels</span>}
-    </li>
-    <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-      <FileText size={20} />
-      {sidebarOpen && <span>Instruments</span>}
-    </li>
-    <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-      <FileArchive size={20} />
-      {sidebarOpen && <span>Contracts</span>}
-    </li>
-  </ul>
+  {/* Home */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <Home size={20} />
+    {sidebarOpen && <span>Home</span>}
+  </li>
+
+  {/* Vessels */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <Ship size={20} />
+    {sidebarOpen && <span>Vessels</span>}
+  </li>
+
+  {/* Instruments */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <FileText size={20} />
+    {sidebarOpen && <span>Instruments</span>}
+  </li>
+
+  {/* Contracts */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <FileArchive size={20} />
+    {sidebarOpen && <span>Contracts</span>}
+  </li>
+
+  {/* Calibration Cylinders */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <Droplet size={20} />
+    {sidebarOpen && <span>Calibration Cylinders</span>}
+  </li>
+
+  {/* Detectors Tubes */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <CircleDot size={20} />
+    {sidebarOpen && <span>Detectors Tubes</span>}
+  </li>
+
+  {/* Alcohol Detectors */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <Flame size={20} />
+    {sidebarOpen && <span>Alcohol Detectors</span>}
+  </li>
+
+  {/* Other */}
+  <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+    <MoreHorizontal size={20} />
+    {sidebarOpen && <span>Other</span>}
+  </li>
+
+  {/* PPE (Dropdown) */}
+  <li>
+    <div
+      className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+      onClick={() => setShowPpe(!showPpe)}
+    >
+      <Shield size={20} />
+      {sidebarOpen && <span>PPE ▾</span>}
+    </div>
+
+    {showPpe && sidebarOpen && (
+      <ul
+      className={`ml-6 mt-1 space-y-1 text-sm overflow-hidden transition-all duration-300 ${
+        showPpe && sidebarOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+      }`}
+    >
+      <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+        <Shirt size={16} />
+        <span>Parkas</span>
+      </li>
+      <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+        <Shoe size={16} />
+        <span>Shoes</span>
+      </li>
+      <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+        <FileText size={16} />
+        <span>Boilersuits</span>
+      </li>
+      <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+        <HardHat size={16} />
+        <span>Helmets</span>
+      </li>
+    </ul>
+    
+    )}
+  </li>
+</ul>
+
 </div>
 
 
