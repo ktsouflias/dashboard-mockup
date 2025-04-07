@@ -12,7 +12,7 @@ import {
   CircleDot,
   MoreHorizontal,
   Shirt,
-  Shoe,
+  ShoppingBag,
   HardHat,
   Flame,
 } from "lucide-react";
@@ -122,7 +122,7 @@ const App = () => {
         <span>Parkas</span>
       </li>
       <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
-        <Shoe size={16} />
+        <ShoppingBag size={16} />
         <span>Shoes</span>
       </li>
       <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
