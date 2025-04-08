@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   Home,
   Ship,
-  FileText,
+  LayoutTemplate,
   FileArchive,
   Sun,
   Moon,
@@ -11,7 +11,7 @@ import {
   CircleDot,
   MoreHorizontal,
   Shirt,
-  ShoppingBag,
+  Footprints,
   HardHat,
   Flame,
 } from "lucide-react";
@@ -140,11 +140,11 @@ const App = () => {
                     <span>Parkas</span>
                   </li>
                   <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
-                    <ShoppingBag size={16} />
+                    <Footprints size={16} />
                     <span>Shoes</span>
                   </li>
                   <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
-                    <FileText size={16} />
+                    <LayoutTemplate size={16} />
                     <span>Boilersuits</span>
                   </li>
                   <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
