@@ -79,9 +79,7 @@ const App = () => {
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-150">
-        <div
-          className={`$%7BsidebarOpen ? "w-64" : "w-20"%7D bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
-        >
+        <div className={`$%7BsidebarOpen ? "w-64" : "w-20"%7D bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}>
           <img
             src={sidebarOpen ? logo : smallLogo}
             alt="Logo"
@@ -121,7 +119,7 @@ const App = () => {
               <MoreHorizontal size={20} />
               {sidebarOpen && <span>Other</span>}
             </li>
-            <li className="relative group">
+            <li>
               <div
                 className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                 onClick={() => setShowPpe(!showPpe)}
@@ -129,8 +127,8 @@ const App = () => {
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
               </div>
-              {sidebarOpen && (
-                <ul className="ml-6 mt-1 space-y-2 text-sm absolute left-full top-0 hidden group-hover:block bg-white dark:bg-gray-700 shadow p-2 rounded-md z-10">
+              {sidebarOpen && showPpe && (
+                <ul className="ml-6 mt-2 space-y-2 text-sm">
                   <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
                     <Shirt size={16} />
                     <span>Parkas</span>
@@ -171,65 +169,31 @@ const App = () => {
             </div>
           </header>
 
-          <div className="grid grid-cols-4 gap-4 p-4">
-            {["Vessels", "Expiring Certificates", "Expired Certificates", "Items to Return"].map((label, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
+            {cards.map((item, index) => (
               <div
-                key={index}
-                className="bg-blue-700 text-white rounded p-4 shadow-md text-center flex flex-col items-center justify-center gap-2 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                key={item.id}
+                className="bg-white dark:bg-gray-800 p-4 rounded-none shadow-lg transition duration-300 hover:shadow-xl cursor-pointer"
               >
-                <h2 className="text-lg font-semibold">{label}</h2>
-                <div className="text-white font-bold bg-red-600 w-6 h-6 rounded flex items-center justify-center">
-                  {index === 0 ? 2 : 0}
-                </div>
-                <p className="text-xs">More info</p>
+                {item.date && (
+                  <p className="text-red-600 font-bold mb-2">{item.date}</p>
+                )}
+                <p>
+                  <strong>Prime Piraeus Email:</strong> {item.email}
+                </p>
+                <p>
+                  <strong>Vessel:</strong> {item.vessel}
+                </p>
+                <p>
+                  <strong>Subject:</strong> {item.subject}
+                </p>
+                {item.documents && (
+                  <p>
+                    <strong>Relevant Documents:</strong> {item.documents}
+                  </p>
+                )}
               </div>
             ))}
-          </div>
-
-          <div className="p-4">
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="cards" direction="horizontal">
-                {(provided) => (
-                  <div
-                    className="flex flex-wrap gap-4"
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {cards.map((item, index) => (
-                      <Draggable key={item.id} draggableId={item.id} index={index}>
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="bg-white dark:bg-gray-800 p-4 rounded-none shadow-lg transition duration-300 hover:shadow-xl cursor-move w-[300px]"
-                          >
-                            {item.date && (
-                              <p className="text-red-600 font-bold mb-2">{item.date}</p>
-                            )}
-                            <p>
-                              <strong>Prime Piraeus Email:</strong> {item.email}
-                            </p>
-                            <p>
-                              <strong>Vessel:</strong> {item.vessel}
-                            </p>
-                            <p>
-                              <strong>Subject:</strong> {item.subject}
-                            </p>
-                            {item.documents && (
-                              <p>
-                                <strong>Relevant Documents:</strong> {item.documents}
-                              </p>
-                            )}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
           </div>
         </div>
       </div>
