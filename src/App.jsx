@@ -92,57 +92,66 @@ const App = () => {
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-150">
         <div
-          className={`${
-            sidebarOpen ? "w-64" : "w-20"
-          } bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
+          className={`${sidebarOpen ? "w-64" : "w-20"
+            } bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
         >
           <img
             src={sidebarOpen ? logo : smallLogo}
             alt="Logo"
-            className={`${
-              sidebarOpen ? "h-10" : "h-8"
-            } w-auto transition-all duration-200 mb-6 mx-auto`}
+            className={`${sidebarOpen ? "h-10" : "h-8"
+              } w-auto transition-all duration-200 mb-6 mx-auto`}
           />
 
-          <ul className="space-y-4">
+          <ul className="space-y-4 relative">
             {menuItems.map((item, index) => (
               <li
                 key={index}
-                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-                title={!sidebarOpen ? item.label : ""}
+                className="group relative flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 text-white hover:bg-gray-800 transition-colors duration-200"
               >
                 {item.icon}
                 {sidebarOpen && <span>{item.label}</span>}
+
+                {!sidebarOpen && (
+                  <span className="absolute left-full top-1/2 -translate-y-1/2 ml-3 w-max whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+                    {item.label}
+                  </span>
+                )}
               </li>
             ))}
 
+            {/* PPE Dropdown */}
             <li
-              className="relative"
+              className="group relative"
               onMouseEnter={() => setShowPpe(true)}
               onMouseLeave={() => setShowPpe(false)}
-              title={!sidebarOpen ? "PPE" : ""}
             >
-              <div
-                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-              >
+              <div className="flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 text-white hover:bg-gray-800 transition-colors duration-200">
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
               </div>
+
+              {/* PPE Tooltip */}
+              {!sidebarOpen && (
+                <span className="absolute left-full top-2 ml-3 w-max whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+                  PPE
+                </span>
+              )}
+
               {sidebarOpen && showPpe && (
-                <ul className="ml-6 mt-2 space-y-2 text-sm">
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+                <ul className="ml-6 mt-2 space-y-2 text-sm bg-gray-900 text-white p-2 rounded-lg shadow-lg">
+                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
                     <Shirt size={16} />
                     <span>Parkas</span>
                   </li>
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
                     <Footprints size={16} />
                     <span>Shoes</span>
                   </li>
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
                     <LayoutTemplate size={16} />
                     <span>Boilersuits</span>
                   </li>
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
+                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
                     <HardHat size={16} />
                     <span>Helmets</span>
                   </li>
@@ -150,6 +159,7 @@ const App = () => {
               )}
             </li>
           </ul>
+
         </div>
 
         <div className="flex-1 flex flex-col">
