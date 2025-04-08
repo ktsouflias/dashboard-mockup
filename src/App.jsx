@@ -248,4 +248,3 @@ const App = () => {
 console.log("UI Updated");
 
 export default App;
-
