@@ -14,6 +14,7 @@ import {
   Footprints,
   HardHat,
   Flame,
+  FileText,
 } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./index.css";
@@ -80,7 +81,9 @@ const App = () => {
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-150">
         <div
-          className={`$%7BsidebarOpen ? "w-64" : "w-20"%7D bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
+          className={`${
+            sidebarOpen ? "w-64" : "w-20"
+          } bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
         >
           <img
             src={sidebarOpen ? logo : smallLogo}
@@ -128,7 +131,6 @@ const App = () => {
             >
               <div
                 className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-                onClick={() => setShowPpe(!showPpe)}
               >
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
