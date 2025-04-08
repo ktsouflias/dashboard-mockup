@@ -81,7 +81,7 @@ const App = () => {
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-150">
         <div
-          className={`${
+          className={`$${
             sidebarOpen ? "w-64" : "w-20"
           } bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
         >
@@ -120,17 +120,25 @@ const App = () => {
               <Flame size={20} />
               {sidebarOpen && <span>Alcohol Detectors</span>}
             </li>
-            
+            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+              <MoreHorizontal size={20} />
+              {sidebarOpen && <span>Other</span>}
+            </li>
             <li
-              className="relative"
+              className="relative group"
               onMouseEnter={() => setShowPpe(true)}
               onMouseLeave={() => setShowPpe(false)}
             >
               <div
-                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 relative"
               >
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
+                {!sidebarOpen && (
+                  <div className="absolute left-full top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 text-xs rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                    PPE
+                  </div>
+                )}
               </div>
               {sidebarOpen && showPpe && (
                 <ul className="ml-6 mt-2 space-y-2 text-sm">
@@ -152,10 +160,6 @@ const App = () => {
                   </li>
                 </ul>
               )}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <MoreHorizontal size={20} />
-              {sidebarOpen && <span>Other</span>}
             </li>
           </ul>
         </div>
@@ -209,23 +213,23 @@ const App = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 hover:shadow-xl cursor-move h-[260px]"
+                            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-move min-h-[260px] flex flex-col justify-between"
                           >
                             {item.date && (
                               <p className="text-red-600 font-bold mb-3 text-sm">{item.date}</p>
                             )}
-                            <p className="mb-2">
+                            <p className="mb-4">
                               <strong>Prime Piraeus Email:</strong> {item.email}
                             </p>
-                            <p className="mb-2">
+                            <p className="mb-4">
                               <strong>Vessel:</strong> {item.vessel}
                             </p>
-                            <p className="mb-2">
+                            <p className="mb-4">
                               <strong>Subject:</strong> {item.subject}
                             </p>
                             {item.documents && (
-                              <p className="mb-2">
-                                <strong>Relevant Documents/Certificates:</strong> {item.documents}
+                              <p className="mb-4">
+                                <strong>Relevant Documents:</strong> {item.documents}
                               </p>
                             )}
                           </div>
@@ -245,4 +249,3 @@ const App = () => {
 };
 
 export default App;
-
