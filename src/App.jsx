@@ -77,68 +77,56 @@ const App = () => {
     setCards(newItems);
   };
 
+  const menuItems = [
+    { icon: <Home size={20} />, label: "Home" },
+    { icon: <Ship size={20} />, label: "Vessels" },
+    { icon: <FileText size={20} />, label: "Instruments" },
+    { icon: <FileArchive size={20} />, label: "Contracts" },
+    { icon: <Droplet size={20} />, label: "Calibration Cylinders" },
+    { icon: <CircleDot size={20} />, label: "Detectors Tubes" },
+    { icon: <Flame size={20} />, label: "Alcohol Detectors" },
+    { icon: <MoreHorizontal size={20} />, label: "Other" },
+  ];
+
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-150">
         <div
-          className={`$${
+          className={`${
             sidebarOpen ? "w-64" : "w-20"
           } bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
         >
           <img
             src={sidebarOpen ? logo : smallLogo}
             alt="Logo"
-            className={`${sidebarOpen ? "h-10" : "h-8"} w-auto transition-all duration-200 mb-6 mx-auto`}
+            className={`${
+              sidebarOpen ? "h-10" : "h-8"
+            } w-auto transition-all duration-200 mb-6 mx-auto`}
           />
 
           <ul className="space-y-4">
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <Home size={20} />
-              {sidebarOpen && <span>Home</span>}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <Ship size={20} />
-              {sidebarOpen && <span>Vessels</span>}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <FileText size={20} />
-              {sidebarOpen && <span>Instruments</span>}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <FileArchive size={20} />
-              {sidebarOpen && <span>Contracts</span>}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <Droplet size={20} />
-              {sidebarOpen && <span>Calibration Cylinders</span>}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <CircleDot size={20} />
-              {sidebarOpen && <span>Detectors Tubes</span>}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <Flame size={20} />
-              {sidebarOpen && <span>Alcohol Detectors</span>}
-            </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <MoreHorizontal size={20} />
-              {sidebarOpen && <span>Other</span>}
-            </li>
+            {menuItems.map((item, index) => (
+              <li
+                key={index}
+                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                title={!sidebarOpen ? item.label : ""}
+              >
+                {item.icon}
+                {sidebarOpen && <span>{item.label}</span>}
+              </li>
+            ))}
+
             <li
-              className="relative group"
+              className="relative"
               onMouseEnter={() => setShowPpe(true)}
               onMouseLeave={() => setShowPpe(false)}
+              title={!sidebarOpen ? "PPE" : ""}
             >
               <div
-                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 relative"
+                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
-                {!sidebarOpen && (
-                  <div className="absolute left-full top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 text-xs rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    PPE
-                  </div>
-                )}
               </div>
               {sidebarOpen && showPpe && (
                 <ul className="ml-6 mt-2 space-y-2 text-sm">
@@ -213,22 +201,22 @@ const App = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-move min-h-[260px] flex flex-col justify-between"
+                            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 hover:shadow-xl cursor-move h-[260px]"
                           >
                             {item.date && (
                               <p className="text-red-600 font-bold mb-3 text-sm">{item.date}</p>
                             )}
-                            <p className="mb-4">
+                            <p className="mb-2">
                               <strong>Prime Piraeus Email:</strong> {item.email}
                             </p>
-                            <p className="mb-4">
+                            <p className="mb-2">
                               <strong>Vessel:</strong> {item.vessel}
                             </p>
-                            <p className="mb-4">
+                            <p className="mb-2">
                               <strong>Subject:</strong> {item.subject}
                             </p>
                             {item.documents && (
-                              <p className="mb-4">
+                              <p className="mb-2">
                                 <strong>Relevant Documents:</strong> {item.documents}
                               </p>
                             )}
@@ -249,3 +237,4 @@ const App = () => {
 };
 
 export default App;
+
