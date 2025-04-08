@@ -108,8 +108,8 @@ const App = () => {
   {menuItems.map((item, index) => (
     <li
       key={index}
-      className="flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 dark:bg-gray-800 text-white hover:text-blue-400 transition-colors duration-200"
-      title={!sidebarOpen ? item.label : ""}
+      className="relative flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+      data-tooltip={item.label}
     >
       {item.icon}
       {sidebarOpen && <span>{item.label}</span>}
@@ -120,14 +120,15 @@ const App = () => {
     className="relative"
     onMouseEnter={() => setShowPpe(true)}
     onMouseLeave={() => setShowPpe(false)}
-    title={!sidebarOpen ? 'PPE' : ''}
+    data-tooltip="PPE"
   >
-    <div className="flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 dark:bg-gray-800 text-white hover:text-blue-400 transition-colors duration-200">
+    <div className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
       <Shield size={20} />
       {sidebarOpen && <span>PPE ▾</span>}
     </div>
+
     {sidebarOpen && showPpe && (
-      <ul className="ml-6 mt-2 space-y-2 text-sm bg-gray-900 dark:bg-gray-800 text-white p-2 rounded-lg shadow-lg">
+      <ul className="ml-6 mt-2 space-y-2 text-sm bg-gray-900 text-white p-2 rounded-lg shadow-lg">
         <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
           <Shirt size={16} />
           <span>Parkas</span>
@@ -147,7 +148,26 @@ const App = () => {
       </ul>
     )}
   </li>
+
+  <style jsx>{`
+    li.relative:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 10px;
+      background-color: #1f2937;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      z-index: 50;
+    }
+  `}</style>
 </ul>
+
 
         </div>
 
