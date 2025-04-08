@@ -245,6 +245,7 @@ const App = () => {
     </div>
   );
 };
+console.log("UI Updated");
 
 export default App;
 
