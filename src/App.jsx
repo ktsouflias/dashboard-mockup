@@ -104,52 +104,51 @@ const App = () => {
             } w-auto transition-all duration-200 mb-6 mx-auto`}
           />
 
-          <ul className="space-y-4">
-            {menuItems.map((item, index) => (
-              <li
-                key={index}
-                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-                title={!sidebarOpen ? item.label : ""}
-              >
-                {item.icon}
-                {sidebarOpen && <span>{item.label}</span>}
-              </li>
-            ))}
+<ul className="space-y-4">
+  {menuItems.map((item, index) => (
+    <li
+      key={index}
+      className="flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 dark:bg-gray-800 text-white hover:text-blue-400 transition-colors duration-200"
+      title={!sidebarOpen ? item.label : ""}
+    >
+      {item.icon}
+      {sidebarOpen && <span>{item.label}</span>}
+    </li>
+  ))}
 
-            <li
-              className="relative"
-              onMouseEnter={() => setShowPpe(true)}
-              onMouseLeave={() => setShowPpe(false)}
-              title={!sidebarOpen ? "PPE" : ""}
-            >
-              <div
-                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-              >
-                <Shield size={20} />
-                {sidebarOpen && <span>PPE ▾</span>}
-              </div>
-              {sidebarOpen && showPpe && (
-                <ul className="ml-6 mt-2 space-y-2 text-sm">
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
-                    <Shirt size={16} />
-                    <span>Parkas</span>
-                  </li>
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
-                    <Footprints size={16} />
-                    <span>Shoes</span>
-                  </li>
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
-                    <LayoutTemplate size={16} />
-                    <span>Boilersuits</span>
-                  </li>
-                  <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-600">
-                    <HardHat size={16} />
-                    <span>Helmets</span>
-                  </li>
-                </ul>
-              )}
-            </li>
-          </ul>
+  <li
+    className="relative"
+    onMouseEnter={() => setShowPpe(true)}
+    onMouseLeave={() => setShowPpe(false)}
+    title={!sidebarOpen ? 'PPE' : ''}
+  >
+    <div className="flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 dark:bg-gray-800 text-white hover:text-blue-400 transition-colors duration-200">
+      <Shield size={20} />
+      {sidebarOpen && <span>PPE ▾</span>}
+    </div>
+    {sidebarOpen && showPpe && (
+      <ul className="ml-6 mt-2 space-y-2 text-sm bg-gray-900 dark:bg-gray-800 text-white p-2 rounded-lg shadow-lg">
+        <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+          <Shirt size={16} />
+          <span>Parkas</span>
+        </li>
+        <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+          <Footprints size={16} />
+          <span>Shoes</span>
+        </li>
+        <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+          <LayoutTemplate size={16} />
+          <span>Boilersuits</span>
+        </li>
+        <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+          <HardHat size={16} />
+          <span>Helmets</span>
+        </li>
+      </ul>
+    )}
+  </li>
+</ul>
+
         </div>
 
         <div className="flex-1 flex flex-col">
