@@ -79,7 +79,7 @@ const App = () => {
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-150">
-        <div className={`$%7BsidebarOpen ? "w-64" : "w-20"%7D bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}>
+        <div className={`${sidebarOpen ? "w-64" : "w-20"} bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}>
           <img
             src={sidebarOpen ? logo : smallLogo}
             alt="Logo"
@@ -120,10 +120,7 @@ const App = () => {
               {sidebarOpen && <span>Other</span>}
             </li>
             <li>
-              <div
-                className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-                onClick={() => setShowPpe(!showPpe)}
-              >
+              <div onClick={() => setShowPpe(!showPpe)} className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
               </div>
@@ -169,31 +166,70 @@ const App = () => {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
-            {cards.map((item, index) => (
+          <div className="grid grid-cols-4 gap-4 p-4">
+            {[
+              "Vessels",
+              "Expiring Certificates",
+              "Expired Certificates",
+              "Items to Return",
+            ].map((label, index) => (
               <div
-                key={item.id}
-                className="bg-white dark:bg-gray-800 p-4 rounded-none shadow-lg transition duration-300 hover:shadow-xl cursor-pointer"
+                key={index}
+                className="bg-blue-700 text-white rounded-lg p-4 shadow-md text-center flex flex-col items-center justify-center gap-2 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
               >
-                {item.date && (
-                  <p className="text-red-600 font-bold mb-2">{item.date}</p>
-                )}
-                <p>
-                  <strong>Prime Piraeus Email:</strong> {item.email}
-                </p>
-                <p>
-                  <strong>Vessel:</strong> {item.vessel}
-                </p>
-                <p>
-                  <strong>Subject:</strong> {item.subject}
-                </p>
-                {item.documents && (
-                  <p>
-                    <strong>Relevant Documents:</strong> {item.documents}
-                  </p>
-                )}
+                <h2 className="text-lg font-semibold">{label}</h2>
+                <div className="text-white font-bold bg-red-600 w-6 h-6 rounded flex items-center justify-center">
+                  {index === 0 ? 2 : 0}
+                </div>
+                <p className="text-xs">More info</p>
               </div>
             ))}
+          </div>
+
+          <div className="p-4">
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="cards" direction="horizontal">
+                {(provided) => (
+                  <div
+                    className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {cards.map((item, index) => (
+                      <Draggable key={item.id} draggableId={item.id} index={index}>
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className="bg-white dark:bg-gray-800 p-4 rounded-none shadow-lg transition duration-300 hover:shadow-xl cursor-move"
+                          >
+                            {item.date && (
+                              <p className="text-red-600 font-bold mb-2">{item.date}</p>
+                            )}
+                            <p>
+                              <strong>Prime Piraeus Email:</strong> {item.email}
+                            </p>
+                            <p>
+                              <strong>Vessel:</strong> {item.vessel}
+                            </p>
+                            <p>
+                              <strong>Subject:</strong> {item.subject}
+                            </p>
+                            {item.documents && (
+                              <p>
+                                <strong>Relevant Documents:</strong> {item.documents}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </div>
         </div>
       </div>
