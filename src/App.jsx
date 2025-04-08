@@ -120,10 +120,7 @@ const App = () => {
               <Flame size={20} />
               {sidebarOpen && <span>Alcohol Detectors</span>}
             </li>
-            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              <MoreHorizontal size={20} />
-              {sidebarOpen && <span>Other</span>}
-            </li>
+            
             <li
               className="relative"
               onMouseEnter={() => setShowPpe(true)}
@@ -155,6 +152,10 @@ const App = () => {
                   </li>
                 </ul>
               )}
+            </li>
+            <li className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+              <MoreHorizontal size={20} />
+              {sidebarOpen && <span>Other</span>}
             </li>
           </ul>
         </div>
