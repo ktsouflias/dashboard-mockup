@@ -224,7 +224,7 @@ const App = () => {
                             </p>
                             {item.documents && (
                               <p className="mb-2">
-                                <strong>Relevant Documents:</strong> {item.documents}
+                                <strong>Relevant Documents/Certificates:</strong> {item.documents}
                               </p>
                             )}
                           </div>
