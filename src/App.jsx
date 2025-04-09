@@ -157,7 +157,7 @@ const App = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col ml-16 sm:ml-64 transition-all duration-300">
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-20'}`}>
           {/* Header */}
           <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center">
             <div className="flex items-center space-x-4">
