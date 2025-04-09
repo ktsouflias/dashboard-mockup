@@ -217,7 +217,7 @@ const App = () => {
                               <p className="text-red-600 font-bold mb-3 text-sm">{item.date}</p>
                             )}
                             <p className="mb-2">
-                              <strong>Prime Piraeus Email:</strong> {item.email}
+                              <strong>Prime Email:</strong> {item.email}
                             </p>
                             <p className="mb-2">
                               <strong>Vessel:</strong> {item.vessel}
