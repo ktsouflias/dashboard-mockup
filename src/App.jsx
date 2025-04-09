@@ -106,7 +106,7 @@ const App = () => {
             {menuItems.map((item, index) => (
               <li
                 key={index}
-                className="group relative flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 text-white hover:bg-gray-800 transition-colors duration-200"
+                className="group relative flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 {item.icon}
                 {sidebarOpen && <span>{item.label}</span>}
@@ -125,7 +125,7 @@ const App = () => {
               onMouseEnter={() => setShowPpe(true)}
               onMouseLeave={() => setShowPpe(false)}
             >
-              <div className="flex items-center space-x-3 p-2 rounded-md cursor-pointer bg-gray-900 text-white hover:bg-gray-800 transition-colors duration-200">
+              <div className="flex items-center space-x-3 p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
               </div>
@@ -159,6 +159,7 @@ const App = () => {
               )}
             </li>
           </ul>
+
 
         </div>
 
