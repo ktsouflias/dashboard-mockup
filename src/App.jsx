@@ -1,4 +1,4 @@
-// App.jsx - Responsive Sidebar with Toggle & Proper Layout
+// App.jsx - Fixed layout spacing issue between sidebar and main content
 import React, { useState } from "react";
 import {
   Home,
@@ -93,7 +93,7 @@ const App = () => {
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
         {/* Sidebar */}
         <div
-          className={`h-screen fixed sm:relative z-50 bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-300
+          className={`h-screen sm:static fixed z-50 bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-300
           ${sidebarOpen ? "w-64" : "w-16"}`}
         >
           <img
@@ -157,7 +157,7 @@ const App = () => {
         </div>
 
         {/* Main Content */}
-        <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-20'}`}>
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarOpen ? 'sm:ml-64 ml-0' : 'sm:ml-20 ml-0'}`}>
           {/* Header */}
           <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center">
             <div className="flex items-center space-x-4">
