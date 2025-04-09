@@ -1,5 +1,5 @@
 // Responsive App.jsx with mobile-friendly sidebar
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Home,
   Ship,
@@ -88,10 +88,23 @@ const App = () => {
     setCards(newItems);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setSidebarOpen(false);
+      } else {
+        setSidebarOpen(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-        {/* Overlay for mobile */}
         {sidebarOpen && (
           <div
             className="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden"
@@ -99,7 +112,6 @@ const App = () => {
           />
         )}
 
-        {/* Sidebar */}
         <div
           className={`fixed sm:relative top-0 left-0 h-full z-50 sm:z-auto bg-white dark:bg-gray-800 shadow-lg p-4 transition-transform duration-300 transform
             ${sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full w-64"} sm:translate-x-0 sm:w-64`}
@@ -167,9 +179,7 @@ const App = () => {
           </ul>
         </div>
 
-        {/* Main Content */}
         <div className="flex-1 flex flex-col sm:ml-64">
-          {/* Header */}
           <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <button onClick={toggleSidebar} className="p-2 text-xl sm:hidden">
@@ -187,7 +197,6 @@ const App = () => {
             </div>
           </header>
 
-          {/* Boxes */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
             {["Vessels", "Expiring Certificates", "Expired Certificates", "Items to Return"].map((label, index) => (
               <div
@@ -203,7 +212,6 @@ const App = () => {
             ))}
           </div>
 
-          {/* Drag & Drop Cards */}
           <div className="p-4">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="cards" direction="horizontal">
