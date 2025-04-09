@@ -1,3 +1,4 @@
+// Responsive App.jsx with mobile-friendly sidebar
 import React, { useState } from "react";
 import {
   Home,
@@ -14,7 +15,6 @@ import {
   Footprints,
   HardHat,
   Flame,
-  FileText,
 } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./index.css";
@@ -23,14 +23,25 @@ import DarkLogo from "./assets/logo-dark (1).png";
 import LightIcon from "./assets/icon-light (1).png";
 import DarkIcon from "./assets/icon-dark (1).png";
 
+const menuItems = [
+  { label: "Home", icon: <Home size={20} /> },
+  { label: "Vessels", icon: <Ship size={20} /> },
+  { label: "Instruments", icon: <LayoutTemplate size={20} /> },
+  { label: "Contracts", icon: <FileArchive size={20} /> },
+  { label: "Calibration Cylinders", icon: <Droplet size={20} /> },
+  { label: "Detectors Tubes", icon: <CircleDot size={20} /> },
+  { label: "Alcohol Detectors", icon: <Flame size={20} /> },
+  { label: "Other", icon: <MoreHorizontal size={20} /> },
+];
+
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showPpe, setShowPpe] = useState(false);
   const [cards, setCards] = useState([
     {
       id: "1",
-      date: "13/10/2025",
+      date: "13/10/2023",
       email: "#14166",
       vessel: "PRIME TEST 7",
       subject: "Expiring Certificates - Notification Email",
@@ -77,29 +88,26 @@ const App = () => {
     setCards(newItems);
   };
 
-  const menuItems = [
-    { icon: <Home size={20} />, label: "Home" },
-    { icon: <Ship size={20} />, label: "Vessels" },
-    { icon: <FileText size={20} />, label: "Instruments" },
-    { icon: <FileArchive size={20} />, label: "Contracts" },
-    { icon: <Droplet size={20} />, label: "Calibration Cylinders" },
-    { icon: <CircleDot size={20} />, label: "Detectors Tubes" },
-    { icon: <Flame size={20} />, label: "Alcohol Detectors" },
-    { icon: <MoreHorizontal size={20} />, label: "Other" },
-  ];
-
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
-      <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-150">
+      <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+        {/* Overlay for mobile */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden"
+            onClick={toggleSidebar}
+          />
+        )}
+
+        {/* Sidebar */}
         <div
-          className={`${sidebarOpen ? "w-64" : "w-20"
-            } bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-200`}
+          className={`fixed sm:relative top-0 left-0 h-full z-50 sm:z-auto bg-white dark:bg-gray-800 shadow-lg p-4 transition-transform duration-300 transform
+            ${sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full w-64"} sm:translate-x-0 sm:w-64`}
         >
           <img
             src={sidebarOpen ? logo : smallLogo}
             alt="Logo"
-            className={`${sidebarOpen ? "h-10" : "h-8"
-              } w-auto transition-all duration-200 mb-6 mx-auto`}
+            className={`h-10 w-auto transition-all duration-200 mb-6 mx-auto`}
           />
 
           <ul className="space-y-4 relative">
@@ -119,7 +127,6 @@ const App = () => {
               </li>
             ))}
 
-            {/* PPE Dropdown */}
             <li
               className="group relative"
               onMouseEnter={() => setShowPpe(true)}
@@ -130,7 +137,6 @@ const App = () => {
                 {sidebarOpen && <span>PPE ▾</span>}
               </div>
 
-              {/* PPE Tooltip */}
               {!sidebarOpen && (
                 <span className="absolute left-full top-2 ml-3 w-max whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
                   PPE
@@ -159,18 +165,18 @@ const App = () => {
               )}
             </li>
           </ul>
-
-
         </div>
 
-        <div className="flex-1 flex flex-col">
-          <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center transition-colors duration-150">
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col sm:ml-64">
+          {/* Header */}
+          <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <button onClick={toggleSidebar} className="p-2 text-xl">
+              <button onClick={toggleSidebar} className="p-2 text-xl sm:hidden">
                 ☰
               </button>
-              <span className="flex items-center space-x-2 text-sm font-medium">
-                Καλώς ήρθες Κωνσταντίνε <span className="text-lg">👋</span>
+              <span className="text-sm font-medium hidden sm:block">
+                Καλώς ήρθες Κωνσταντίνε 👋
               </span>
             </div>
             <div className="flex items-center space-x-4">
@@ -181,14 +187,15 @@ const App = () => {
             </div>
           </header>
 
-          <div className="grid grid-cols-4 gap-4 p-4">
+          {/* Boxes */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
             {["Vessels", "Expiring Certificates", "Expired Certificates", "Items to Return"].map((label, index) => (
               <div
                 key={index}
-                className="bg-blue-700 text-white rounded p-4 shadow-md text-center flex flex-col items-center justify-center gap-2 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                className="bg-blue-700 text-white rounded p-4 shadow-md text-center flex flex-col items-center justify-center gap-2 hover:shadow-lg cursor-pointer"
               >
                 <h2 className="text-lg font-semibold">{label}</h2>
-                <div className="text-white font-bold bg-red-600 w-6 h-6 rounded flex items-center justify-center">
+                <div className="bg-red-600 w-6 h-6 rounded-full flex items-center justify-center font-bold">
                   {index === 0 ? 2 : 0}
                 </div>
                 <p className="text-xs">More info</p>
@@ -196,6 +203,7 @@ const App = () => {
             ))}
           </div>
 
+          {/* Drag & Drop Cards */}
           <div className="p-4">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="cards" direction="horizontal">
@@ -212,25 +220,13 @@ const App = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 hover:shadow-xl cursor-move h-[260px]"
+                            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl cursor-move h-[260px]"
                           >
-                            {item.date && (
-                              <p className="text-red-600 font-bold mb-3 text-sm">{item.date}</p>
-                            )}
-                            <p className="mb-2">
-                              <strong>Prime Email:</strong> {item.email}
-                            </p>
-                            <p className="mb-2">
-                              <strong>Vessel:</strong> {item.vessel}
-                            </p>
-                            <p className="mb-2">
-                              <strong>Subject:</strong> {item.subject}
-                            </p>
-                            {item.documents && (
-                              <p className="mb-2">
-                                <strong>Relevant Documents:</strong> {item.documents}
-                              </p>
-                            )}
+                            {item.date && <p className="text-red-600 font-bold mb-3 text-sm">{item.date}</p>}
+                            <p className="mb-2"><strong>Prime Piraeus Email:</strong> {item.email}</p>
+                            <p className="mb-2"><strong>Vessel:</strong> {item.vessel}</p>
+                            <p className="mb-2"><strong>Subject:</strong> {item.subject}</p>
+                            {item.documents && <p className="mb-2"><strong>Relevant Documents:</strong> {item.documents}</p>}
                           </div>
                         )}
                       </Draggable>
@@ -246,6 +242,6 @@ const App = () => {
     </div>
   );
 };
-console.log("UI Updated");
 
 export default App;
+
