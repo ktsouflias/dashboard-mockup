@@ -113,8 +113,8 @@ const App = () => {
         )}
 
         <div
-          className={`fixed sm:relative top-0 left-0 h-full z-50 sm:z-auto bg-white dark:bg-gray-800 shadow-lg p-4 transition-transform duration-300 transform
-            ${sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full w-64"} sm:translate-x-0 sm:w-64`}
+          className={`fixed sm:relative top-0 left-0 min-h-screen sm:h-auto z-50 sm:z-auto bg-white dark:bg-gray-800 shadow-lg p-4 transition-transform duration-300 transform
+    ${sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full w-64"} sm:translate-x-0 sm:w-64`}
         >
           <img
             src={sidebarOpen ? logo : smallLogo}
