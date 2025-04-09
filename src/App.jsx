@@ -1,4 +1,4 @@
-// Fully Responsive App.jsx with Sidebar Toggle & Fixed Layout
+// App.jsx - Responsive Sidebar with Toggle & Proper Layout
 import React, { useState } from "react";
 import {
   Home,
@@ -91,16 +91,10 @@ const App = () => {
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-        {sidebarOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden"
-            onClick={toggleSidebar}
-          />
-        )}
-
+        {/* Sidebar */}
         <div
-          className={`fixed sm:relative top-0 left-0 h-full z-50 sm:z-auto bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-300
-            ${sidebarOpen ? "w-64" : "w-20"}`}
+          className={`h-screen fixed sm:relative z-50 bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-300
+          ${sidebarOpen ? "w-64" : "w-16"}`}
         >
           <img
             src={sidebarOpen ? logo : smallLogo}
@@ -162,15 +156,15 @@ const App = () => {
           </ul>
         </div>
 
-        <div className="flex-1 flex flex-col ml-20 sm:ml-64">
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col ml-16 sm:ml-64 transition-all duration-300">
+          {/* Header */}
           <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <button onClick={toggleSidebar} className="p-2 text-xl">
                 ☰
               </button>
-              <span className="text-sm font-medium hidden sm:block">
-                Καλώς ήρθες Κωνσταντίνε 👋
-              </span>
+              <span className="text-sm font-medium">Καλώς ήρθες Κωνσταντίνε 👋</span>
             </div>
             <div className="flex items-center space-x-4">
               <button onClick={toggleDarkMode} className="p-2">
@@ -180,6 +174,7 @@ const App = () => {
             </div>
           </header>
 
+          {/* Boxes */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
             {["Vessels", "Expiring Certificates", "Expired Certificates", "Items to Return"].map((label, index) => (
               <div
@@ -195,6 +190,7 @@ const App = () => {
             ))}
           </div>
 
+          {/* Drag & Drop Cards */}
           <div className="p-4">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="cards" direction="horizontal">
