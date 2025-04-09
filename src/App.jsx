@@ -1,5 +1,5 @@
-// Responsive App.jsx with mobile-friendly sidebar
-import React, { useState, useEffect } from "react";
+// Fully Responsive App.jsx with Sidebar Toggle & Fixed Layout
+import React, { useState } from "react";
 import {
   Home,
   Ship,
@@ -36,7 +36,7 @@ const menuItems = [
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showPpe, setShowPpe] = useState(false);
   const [cards, setCards] = useState([
     {
@@ -88,20 +88,6 @@ const App = () => {
     setCards(newItems);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setSidebarOpen(false);
-      } else {
-        setSidebarOpen(true);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
       <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
@@ -113,13 +99,13 @@ const App = () => {
         )}
 
         <div
-          className={`fixed sm:relative top-0 left-0 min-h-screen sm:h-auto z-50 sm:z-auto bg-white dark:bg-gray-800 shadow-lg p-4 transition-transform duration-300 transform
-    ${sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full w-64"} sm:translate-x-0 sm:w-64`}
+          className={`fixed sm:relative top-0 left-0 h-full z-50 sm:z-auto bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-300
+            ${sidebarOpen ? "w-64" : "w-20"}`}
         >
           <img
             src={sidebarOpen ? logo : smallLogo}
             alt="Logo"
-            className={`h-10 w-auto transition-all duration-200 mb-6 mx-auto`}
+            className="h-10 w-auto transition-all duration-200 mb-6 mx-auto"
           />
 
           <ul className="space-y-4 relative">
@@ -130,7 +116,6 @@ const App = () => {
               >
                 {item.icon}
                 {sidebarOpen && <span>{item.label}</span>}
-
                 {!sidebarOpen && (
                   <span className="absolute left-full top-1/2 -translate-y-1/2 ml-3 w-max whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
                     {item.label}
@@ -148,13 +133,11 @@ const App = () => {
                 <Shield size={20} />
                 {sidebarOpen && <span>PPE ▾</span>}
               </div>
-
               {!sidebarOpen && (
                 <span className="absolute left-full top-2 ml-3 w-max whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
                   PPE
                 </span>
               )}
-
               {sidebarOpen && showPpe && (
                 <ul className="ml-6 mt-2 space-y-2 text-sm bg-gray-900 text-white p-2 rounded-lg shadow-lg">
                   <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
@@ -179,10 +162,10 @@ const App = () => {
           </ul>
         </div>
 
-        <div className="flex-1 flex flex-col sm:ml-64">
+        <div className="flex-1 flex flex-col ml-20 sm:ml-64">
           <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <button onClick={toggleSidebar} className="p-2 text-xl sm:hidden">
+              <button onClick={toggleSidebar} className="p-2 text-xl">
                 ☰
               </button>
               <span className="text-sm font-medium hidden sm:block">
