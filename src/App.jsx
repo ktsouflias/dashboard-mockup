@@ -223,7 +223,8 @@ const App = () => {
                             className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl cursor-move h-[260px]"
                           >
                             {item.date && <p className="text-red-600 font-bold mb-3 text-sm">{item.date}</p>}
-                            <p className="mb-2"><strong>Prime Piraeus Email:</strong> {item.email}</p>
+                            <p className="mb-2"><strong>Prime Email:</strong> {item.email}</p>
+                            <p>Contact Info:</p>
                             <p className="mb-2"><strong>Vessel:</strong> {item.vessel}</p>
                             <p className="mb-2"><strong>Subject:</strong> {item.subject}</p>
                             {item.documents && <p className="mb-2"><strong>Relevant Documents:</strong> {item.documents}</p>}
