@@ -1,4 +1,4 @@
-// App.jsx - Fixed layout spacing issue between sidebar and main content
+// App.jsx - Final Fixed Layout
 import React, { useState } from "react";
 import {
   Home,
@@ -90,12 +90,9 @@ const App = () => {
 
   return (
     <div className={`${darkMode ? "dark" : ""}`}>
-      <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div className="flex h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white overflow-hidden">
         {/* Sidebar */}
-        <div
-          className={`h-screen sm:static fixed z-50 bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-300
-          ${sidebarOpen ? "w-64" : "w-16"}`}
-        >
+        <div className={`h-full fixed sm:relative z-50 bg-white dark:bg-gray-800 shadow-lg p-4 transition-all duration-300 ${sidebarOpen ? "w-64" : "w-16"}`}>
           <img
             src={sidebarOpen ? logo : smallLogo}
             alt="Logo"
@@ -156,8 +153,8 @@ const App = () => {
           </ul>
         </div>
 
-        {/* Main Content */}
-        <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarOpen ? 'sm:ml-64 ml-0' : 'sm:ml-20 ml-0'}`}>
+        {/* Main content wrapper */}
+        <div className={`flex flex-col flex-1 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-16"}`}>
           {/* Header */}
           <header className="bg-white dark:bg-gray-800 p-4 shadow flex justify-between items-center">
             <div className="flex items-center space-x-4">
@@ -190,7 +187,7 @@ const App = () => {
             ))}
           </div>
 
-          {/* Drag & Drop Cards */}
+          {/* Cards */}
           <div className="p-4">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="cards" direction="horizontal">
@@ -232,4 +229,3 @@ const App = () => {
 };
 
 export default App;
-
