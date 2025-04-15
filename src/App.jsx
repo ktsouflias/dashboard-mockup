@@ -134,7 +134,7 @@ const App = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
             {["Vessels", "Expiring Certificates", "Expired Certificates", "Items to Return"].map((label, index) => (
-              <div key={index} className="bg-blue-700 text-white rounded p-4 shadow-md text-center flex flex-col items-center justify-center gap-2 hover:shadow-lg cursor-pointer">
+              <div key={index} className="bg-[#1e2f46] text-white rounded p-4 shadow-md text-center flex flex-col items-center justify-center gap-2 hover:shadow-lg cursor-pointer">
                 <h2 className="text-lg font-semibold">{label}</h2>
                 <div className="bg-red-600 w-6 h-6 rounded-full flex items-center justify-center font-bold">
                   {index === 0 ? 2 : 0}
